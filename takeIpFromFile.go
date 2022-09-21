@@ -35,6 +35,7 @@ func main() {
 	defer f.Close()
 
 	for _, element2 := range submatchall {
+		_, err = f.WriteString(" ") // Благодаря этой строке появляется пробел между IP-адресами в файле onlyIP.txt
 		_, err = f.WriteString(element2)
 	}
 }
