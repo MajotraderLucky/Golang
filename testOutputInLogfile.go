@@ -39,8 +39,17 @@ func main(){
 	// Мы фильтруем данные, которые получаем из файла tdlfFile.txt,
 	// и помещаем отфильтрованные IP-адреса в созданный файл testLog.log
 	// Всё протестировано и всё работает нормально.
-	// Теперь необходимо присвоить первый IP из файла testLog.log переменной
+	// Теперь надо создать переменную и присвоить ей строку IP-адресов из 
+	// файла testLog.log
 
-	takeFirstIp := pRe.FindString(str1)
+	ipList, err := ioutil.ReadFile("/home/ryazanov/MyCode/GoCode/MajorGo/Monitoring/testLog.log")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	listIpInString := string(ipList)
+	fmt.Println(pRe.MatchString(listIpInString)) // true
+
+	takeFirstIp := pRe.FindString(listIpInString)
 	
 }
