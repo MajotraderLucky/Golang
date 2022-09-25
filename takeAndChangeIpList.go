@@ -25,7 +25,6 @@ func main() {
 	submatchall := pRe.FindAllString(str1, -1)
 	for _, element := range submatchall {
 		fmt.Println(element)
-
 	}
 
 	// Теперь необходимо записать полученные данные в новый файл
@@ -52,6 +51,6 @@ func main() {
 
 	re := regexp.MustCompile(`(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}`)
 
-	fmt.Printf("Pattern: %v\n", re.String())     // print pattern
+	//fmt.Printf("Pattern: %v\n", re.String())     // print pattern
 	fmt.Println(re.MatchString(FirstIpInString)) // true
 }
