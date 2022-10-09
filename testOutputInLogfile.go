@@ -63,16 +63,28 @@ func main() {
 	// Удалим пробелы, если есть, в строчной переменной takeFirstIp
 	takeFirstIp = strings.ReplaceAll(takeFirstIp, " ", "")
 
-	// Создаём массив, где будут храниться Ip-адреса, которые мы будем извлекать по
-	// одному из файла testLog.log
+	// Создаём структуру, в которой будут храниться:
+	// строковый массив ip-адресов и количество запросов по каждому ip
+	// данные будем получать из файла testLog.log
 
-	var ipInStringArr [500]string
-	var indexForArr int = 0 // Индекс массива, который будет увеличиваться инкрементом
+	type IpList struct {
+		ipInStringArr    [500]string // Сюда будем помещать Ip
+		numberOfRequests [500]int    // Здесь будем считать количество запросов
+		indexForArr      int
+	}
+
+	a := new(IpList)
+
+	//var ipInStringArr [500]string
+	a.indexForArr = 0 // Индекс массива, который будет увеличиваться инкрементом
 	// после того, как строка с ip-адресом будет положена в массив.
-	ipInStringArr[indexForArr] = takeFirstIp
-	fmt.Print("Массиву с индексом [", indexForArr, "] было присвоено значение ", ipInStringArr[0], "\n")
-	indexForArr++
-	fmt.Println("Индекс массива indexForArr увеличился и принял значение -", indexForArr)
+	a.ipInStringArr[a.indexForArr] = takeFirstIp
+	fmt.Print("Массиву с индексом [", a.indexForArr, "] было присвоено значение ", a.ipInStringArr[0], "\n")
+
+	a.numberOfRequests[a.indexForArr] = 1 // ip-адрес массива a.ipInStringArr[a.indexForArr] был упомянут a.indexForArr 1 раз.
+
+	a.indexForArr++
+	fmt.Println("Индекс массива indexForArr увеличился и принял значение -", a.indexForArr)
 
 	// Дальше посчитаем, количество символов в строчной переменной
 	// takeFirstIp
