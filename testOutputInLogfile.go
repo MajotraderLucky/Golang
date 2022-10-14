@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	takeContent, err := ioutil.ReadFile("/home/sergey/Downloads/tdlfFile.txt")
+	takeContent, err := ioutil.ReadFile("/home/ryazanov/Downloads/tdlfFile.txt") // Берем данные из лог-файла
 
 	if err != nil {
 		log.Fatal(err)
@@ -44,7 +44,7 @@ func main() {
 	// Теперь надо создать переменную и присвоить ей строку IP-адресов из
 	// файла testLog.log
 
-	ipList, err := ioutil.ReadFile("/home/sergey/MyCode/GoCode/Golang/testLog.log")
+	ipList, err := ioutil.ReadFile("/home/ryazanov/MyCode/GoCode/MajorGo/Monitoring/testLog.log")
 
 	if err != nil {
 		log.Fatal(err)
