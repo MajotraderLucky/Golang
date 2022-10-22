@@ -32,7 +32,6 @@ func main() {
 
 	submatchall := pRe.FindAllString(str1, -1)
 	for _, element := range submatchall {
-		//fmt.Println(element, "\n")
 		_, err = createLogFile.WriteString(" ")
 		_, err = createLogFile.WriteString(element)
 	}
@@ -73,11 +72,10 @@ func main() {
 		indexForArr      int
 	}
 
-	a := new(IpList)
+	a := new(IpList) // Инициализация структуры
 
-	//var ipInStringArr [500]string
 	a.indexForArr = 0 // Индекс массива, который будет увеличиваться инкрементом
-	// после того, как строка с ip-адресом будет положена в массив.
+	// после того как строка с ip-адресом будет положена в массив.
 	a.ipInStringArr[a.indexForArr] = takeFirstIp
 	fmt.Print("Массиву с индексом [", a.indexForArr, "] было присвоено значение ", a.ipInStringArr[0], "\n")
 
@@ -106,4 +104,5 @@ func main() {
 
 	createNewLogFile.Write([]byte(subListIpInString))
 
+	// Далее можно удалить файл testLog.log и переименовать файл newTestLog.log в testLog.log, чтобы дальше с ним работать.
 }
