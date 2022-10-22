@@ -138,4 +138,8 @@ func main() {
 
 	takeFirstIp = pRe.FindString(listIpInString)
 	fmt.Println(takeFirstIp, " - Выводим переменную takeFirstIp")
+
+	// Удалим пробелы, если есть, в строчной переменной takeFirstIp
+	takeFirstIp = strings.ReplaceAll(takeFirstIp, " ", "")
+	fmt.Println("Пересенная a.indexForArr = ", a.indexForArr)
 }
