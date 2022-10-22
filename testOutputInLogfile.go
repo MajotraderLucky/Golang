@@ -43,6 +43,10 @@ func main() {
 	// Теперь надо создать переменную и присвоить ей строку IP-адресов из
 	// файла testLog.log
 
+	//-------------------------------------------------------------------------------------------+
+	//         Далее идёт повторяющийся раздел, который необходимо обернуть в цикл for           |
+	//-------------------------------------------------------------------------------------------+
+
 	ipList, err := ioutil.ReadFile("/home/ryazanov/MyCode/GoCode/MajorGo/Monitoring/testLog.log")
 
 	if err != nil {
@@ -121,4 +125,17 @@ func main() {
 		return
 	}
 	fmt.Println("Файл newTestLog.log был переименован в testLog.log")
+
+	// Повторяем блок считывания первого ip-адреса
+	// -----------------------------------------------------------------------------------------
+	ipList, err = ioutil.ReadFile("/home/ryazanov/MyCode/GoCode/MajorGo/Monitoring/testLog.log")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	listIpInString = string(ipList)
+	fmt.Println(pRe.MatchString(listIpInString)) // true
+
+	takeFirstIp = pRe.FindString(listIpInString)
+	fmt.Println(takeFirstIp, " - Выводим переменную takeFirstIp")
 }
