@@ -144,5 +144,11 @@ func main() {
 	// Сравним ip-адрес из переменной takeFirstIp с каждым элементом массива ipInStringArr
 	for i := a.indexForArr; i >= 0; i-- {
 		fmt.Print("Массив a.ipInStringArr[", i, "]", " = ", a.ipInStringArr[i], "\n")
+		if a.ipInStringArr[i] != takeFirstIp {
+			fmt.Println("'", a.ipInStringArr[i], "'", "!=", takeFirstIp)
+		} else {
+			a.numberOfRequests[i]++
+			fmt.Println("ip-адрес -", a.ipInStringArr[i], "повторяется", a.numberOfRequests[i], "раз")
+		}
 	}
 }
