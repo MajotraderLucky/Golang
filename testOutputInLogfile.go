@@ -47,7 +47,7 @@ func main() {
 	//         Далее идёт повторяющийся раздел, который необходимо обернуть в цикл for           |
 	//-------------------------------------------------------------------------------------------+
 
-	ipList, err := ioutil.ReadFile("/home/ryazanov/MyCode/GoCode/MajorGo/Monitoring/testLog.log")
+	ipList, err := ioutil.ReadFile("testLog.log")
 
 	if err != nil {
 		log.Fatal(err)
@@ -97,7 +97,6 @@ func main() {
 	// Теперь удалим количество знаков переменной howManyLetters
 	// из строчной переменной listIpInString
 	subListIpInString := listIpInString[howManyLetters:]
-	//fmt.Print(subListIpInString)
 
 	// Теперь создадим новый файл и запишем в него строчную переменную subListIpInString для проверки
 	createNewLogFile, err := os.Create("newTestLog.log")
@@ -128,7 +127,7 @@ func main() {
 
 	// Повторяем блок считывания первого ip-адреса
 	// -----------------------------------------------------------------------------------------
-	ipList, err = ioutil.ReadFile("/home/ryazanov/MyCode/GoCode/MajorGo/Monitoring/testLog.log")
+	ipList, err = ioutil.ReadFile("testLog.log")
 
 	if err != nil {
 		log.Fatal(err)
@@ -141,5 +140,9 @@ func main() {
 
 	// Удалим пробелы, если есть, в строчной переменной takeFirstIp
 	takeFirstIp = strings.ReplaceAll(takeFirstIp, " ", "")
-	fmt.Println("Пересенная a.indexForArr = ", a.indexForArr)
+
+	// Сравним ip-адрес из переменной takeFirstIp с каждым элементом массива ipInStringArr
+	for i := a.indexForArr; i >= 0; i-- {
+		fmt.Print("Массив a.ipInStringArr[", i, "]", " = ", a.ipInStringArr[i], "\n")
+	}
 }
