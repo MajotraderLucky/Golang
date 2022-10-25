@@ -152,4 +152,6 @@ func main() {
 	// }
 	a.ipInStringArr[a.indexForArr] = takeFirstIp
 	fmt.Println(a.ipInStringArr[0:2])
+	a.indexForArr++
+	fmt.Println("Индекс массива теперь составляет", a.indexForArr)
 }
