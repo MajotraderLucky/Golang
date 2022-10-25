@@ -90,7 +90,6 @@ func main() {
 
 	// Дальше посчитаем, количество символов в строчной переменной
 	// takeFirstIp
-
 	howManyLetters := (len(takeFirstIp)) + 2
 	fmt.Println("В строке ", takeFirstIp, "-", howManyLetters, "символов.")
 
@@ -142,13 +141,15 @@ func main() {
 	takeFirstIp = strings.ReplaceAll(takeFirstIp, " ", "")
 
 	// Сравним ip-адрес из переменной takeFirstIp с каждым элементом массива ipInStringArr
-	for i := a.indexForArr; i >= 0; i-- {
-		fmt.Print("Массив a.ipInStringArr[", i, "]", " = ", a.ipInStringArr[i], "\n")
-		if a.ipInStringArr[i] != takeFirstIp {
-			fmt.Println("'", a.ipInStringArr[i], "'", "!=", takeFirstIp)
-		} else {
-			a.numberOfRequests[i]++
-			fmt.Println("ip-адрес -", a.ipInStringArr[i], "повторяется", a.numberOfRequests[i], "раз")
-		}
-	}
+	// for i := a.indexForArr; i >= 0; i-- {
+	// 	fmt.Print("Массив a.ipInStringArr[", i, "]", " = ", a.ipInStringArr[i], "\n")
+	// 	if a.ipInStringArr[i] != takeFirstIp {
+	// 		fmt.Println("'", a.ipInStringArr[i], "'", "!=", takeFirstIp)
+	// 	} else {
+	// 		a.numberOfRequests[i]++
+	// 		fmt.Println("ip-адрес -", a.ipInStringArr[i], "повторяется", a.numberOfRequests[i], "раз")
+	// 	}
+	// }
+	a.ipInStringArr[a.indexForArr] = takeFirstIp
+	fmt.Println(a.ipInStringArr[0:2])
 }
