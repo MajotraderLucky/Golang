@@ -151,7 +151,27 @@ func main() {
 	// 	}
 	// }
 	a.ipInStringArr[a.indexForArr] = takeFirstIp
-	fmt.Println(a.ipInStringArr[0:2])
+	fmt.Println(a.ipInStringArr[0 : a.indexForArr+1])
 	a.indexForArr++
 	fmt.Println("Индекс массива теперь составляет", a.indexForArr)
+
+	// Дальше посчитаем, количество символов в строчной переменной
+	// takeFirstIp
+	howManyLetters = (len(takeFirstIp)) + 1 // В предыдущем действии
+	// нужно было добавлять +2, но в этом удалении был удалён один лишний
+	// символ. Нужно разобраться в этой ошибке.
+	fmt.Println("В строке ", takeFirstIp, "-", howManyLetters, "символов.")
+
+	// Теперь удалим количество знаков переменной howManyLetters
+	// из строчной переменной listIpInString
+	subListIpInString = listIpInString[howManyLetters:]
+
+	// Теперь создадим новый файл и запишем в него строчную переменную subListIpInString для проверки
+	createNewLogFile, err = os.Create("newTestLog.log")
+	if err != nil {
+		panic(err)
+	}
+	defer createNewLogFile.Close()
+
+	createNewLogFile.Write([]byte(subListIpInString))
 }
