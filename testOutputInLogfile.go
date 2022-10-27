@@ -174,4 +174,25 @@ func main() {
 	defer createNewLogFile.Close()
 
 	createNewLogFile.Write([]byte(subListIpInString))
+
+	// Далее можно удалить файл testLog.log и переименовать файл newTestLog.log в testLog.log, чтобы дальше с ним работать.
+
+	// Удаляем файл testLog.log
+	err = os.Remove("testLog.log")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Был удалён файл testLog.log")
+
+	// Переименуем файл newTestLog.log в testLog.log
+	err = os.Rename("newTestLog.log", "testLog.log")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Файл newTestLog.log был переименован в testLog.log")
+
+	// Пока не будем запускать цикл for - сначала проверим пошагово обработку
+	// ip-адресов из файла testLog.log
 }
