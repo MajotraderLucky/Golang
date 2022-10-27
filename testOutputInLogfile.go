@@ -195,4 +195,156 @@ func main() {
 
 	// Пока не будем запускать цикл for - сначала проверим пошагово обработку
 	// ip-адресов из файла testLog.log
+
+	// Повторяем блок считывания первого ip-адреса
+	// -----------------------------------------------------------------------------------------
+	ipList, err = ioutil.ReadFile("testLog.log")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	listIpInString = string(ipList)
+	fmt.Println(pRe.MatchString(listIpInString)) // true
+
+	takeFirstIp = pRe.FindString(listIpInString)
+	fmt.Println(takeFirstIp, " - Выводим переменную takeFirstIp")
+
+	// Удалим пробелы, если есть, в строчной переменной takeFirstIp
+	takeFirstIp = strings.ReplaceAll(takeFirstIp, " ", "")
+
+	// Сравним ip-адрес из переменной takeFirstIp с каждым элементом массива ipInStringArr
+	// for i := a.indexForArr; i >= 0; i-- {
+	// 	fmt.Print("Массив a.ipInStringArr[", i, "]", " = ", a.ipInStringArr[i], "\n")
+	// 	if a.ipInStringArr[i] != takeFirstIp {
+	// 		fmt.Println("'", a.ipInStringArr[i], "'", "!=", takeFirstIp)
+	// 	} else {
+	// 		a.numberOfRequests[i]++
+	// 		fmt.Println("ip-адрес -", a.ipInStringArr[i], "повторяется", a.numberOfRequests[i], "раз")
+	// 	}
+	// }
+	a.ipInStringArr[a.indexForArr] = takeFirstIp
+	fmt.Println(a.ipInStringArr[0 : a.indexForArr+1])
+	a.indexForArr++
+	fmt.Println("Индекс массива теперь составляет", a.indexForArr)
+
+	// Дальше посчитаем, количество символов в строчной переменной
+	// takeFirstIp
+	howManyLetters = (len(takeFirstIp)) + 1 // В предыдущем действии
+	// нужно было добавлять +2, но в этом удалении был удалён один лишний
+	// символ. Нужно разобраться в этой ошибке.
+	fmt.Println("В строке ", takeFirstIp, "-", howManyLetters, "символов.")
+
+	// Теперь удалим количество знаков переменной howManyLetters
+	// из строчной переменной listIpInString
+	subListIpInString = listIpInString[howManyLetters:]
+
+	// Теперь создадим новый файл и запишем в него строчную переменную subListIpInString для проверки
+	createNewLogFile, err = os.Create("newTestLog.log")
+	if err != nil {
+		panic(err)
+	}
+	defer createNewLogFile.Close()
+
+	createNewLogFile.Write([]byte(subListIpInString))
+
+	// Далее можно удалить файл testLog.log и переименовать файл newTestLog.log в testLog.log, чтобы дальше с ним работать.
+
+	// Удаляем файл testLog.log
+	err = os.Remove("testLog.log")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Был удалён файл testLog.log")
+
+	// Переименуем файл newTestLog.log в testLog.log
+	err = os.Rename("newTestLog.log", "testLog.log")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Файл newTestLog.log был переименован в testLog.log")
+
+	// Пока не будем запускать цикл for - сначала проверим пошагово обработку
+	// ip-адресов из файла testLog.log
+
+	// Теперь попробуем исполльзовать цикл for, чтобы ускорить процесс
+	// тестирования.
+
+	for i := 10; i >= 0; i-- {
+		// Повторяем блок считывания первого ip-адреса
+		// -----------------------------------------------------------------------------------------
+		ipList, err = ioutil.ReadFile("testLog.log")
+
+		if err != nil {
+			log.Fatal(err)
+		}
+		listIpInString = string(ipList)
+		fmt.Println(pRe.MatchString(listIpInString)) // true
+
+		takeFirstIp = pRe.FindString(listIpInString)
+		fmt.Println(takeFirstIp, " - Выводим переменную takeFirstIp")
+
+		// Удалим пробелы, если есть, в строчной переменной takeFirstIp
+		takeFirstIp = strings.ReplaceAll(takeFirstIp, " ", "")
+
+		// Сравним ip-адрес из переменной takeFirstIp с каждым элементом массива ipInStringArr
+		// for i := a.indexForArr; i >= 0; i-- {
+		// 	fmt.Print("Массив a.ipInStringArr[", i, "]", " = ", a.ipInStringArr[i], "\n")
+		// 	if a.ipInStringArr[i] != takeFirstIp {
+		// 		fmt.Println("'", a.ipInStringArr[i], "'", "!=", takeFirstIp)
+		// 	} else {
+		// 		a.numberOfRequests[i]++
+		// 		fmt.Println("ip-адрес -", a.ipInStringArr[i], "повторяется", a.numberOfRequests[i], "раз")
+		// 	}
+		// }
+		a.ipInStringArr[a.indexForArr] = takeFirstIp
+		fmt.Println(a.ipInStringArr[0 : a.indexForArr+1])
+		a.indexForArr++
+		fmt.Println("Индекс массива теперь составляет", a.indexForArr)
+
+		// Дальше посчитаем, количество символов в строчной переменной
+		// takeFirstIp
+		howManyLetters = (len(takeFirstIp)) + 1 // В предыдущем действии
+		// нужно было добавлять +2, но в этом удалении был удалён один лишний
+		// символ. Нужно разобраться в этой ошибке.
+		fmt.Println("В строке ", takeFirstIp, "-", howManyLetters, "символов.")
+
+		// Теперь удалим количество знаков переменной howManyLetters
+		// из строчной переменной listIpInString
+		subListIpInString = listIpInString[howManyLetters:]
+
+		// Теперь создадим новый файл и запишем в него строчную переменную subListIpInString для проверки
+		createNewLogFile, err = os.Create("newTestLog.log")
+		if err != nil {
+			panic(err)
+		}
+		defer createNewLogFile.Close()
+
+		createNewLogFile.Write([]byte(subListIpInString))
+
+		// Далее можно удалить файл testLog.log и переименовать файл newTestLog.log в testLog.log, чтобы дальше с ним работать.
+
+		// Удаляем файл testLog.log
+		err = os.Remove("testLog.log")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		fmt.Println("Был удалён файл testLog.log")
+
+		// Переименуем файл newTestLog.log в testLog.log
+		err = os.Rename("newTestLog.log", "testLog.log")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		fmt.Println("Файл newTestLog.log был переименован в testLog.log")
+
+		// Пока не будем запускать цикл for - сначала проверим пошагово обработку
+		// ip-адресов из файла testLog.log
+
+		// Теперь попробуем исполльзовать цикл for, чтобы ускорить процесс
+		// тестирования.
+	}
 }
