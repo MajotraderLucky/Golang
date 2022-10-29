@@ -9,6 +9,7 @@ import (
 	"log"
 	"os"
 	"regexp"
+	"strings"
 )
 
 func main() {
@@ -40,5 +41,31 @@ func main() {
 		_, err = createLogFile.WriteString(" ")
 		_, err = createLogFile.WriteString(element)
 	}
+	fmt.Println("------------------------------------------------------")
+	fmt.Println("Был создан файл logTostringIp.log")
+	fmt.Println("В файл logTostringIp.log записана последовательность \nip-адресов, которые были получены из лог-файла")
+	fmt.Println("------------------------------------------------------")
+
+	// Читаем файл logTostringIp.log в строчную переменную listIpInString
+
+	ipList, err := ioutil.ReadFile("logTostringIp.log")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	listIpInString := string(ipList)
+	fmt.Println(pRe.MatchString(listIpInString)) // true
+
+	// Проверяем, есть ли пробел в начале строки и удаляем его
+	listIpInString = strings.TrimSpace(listIpInString)
+
+	// Теперь создадим новый файл и запишем в него строчную переменную subListIpInString для проверки
+	createNewLogFile, err := os.Create("newlogTostringIp.log")
+	if err != nil {
+		panic(err)
+	}
+	defer createNewLogFile.Close()
+
+	createNewLogFile.Write([]byte(listIpInString))
 
 }
