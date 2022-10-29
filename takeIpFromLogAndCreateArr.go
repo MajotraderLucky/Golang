@@ -68,4 +68,20 @@ func main() {
 
 	createNewLogFile.Write([]byte(listIpInString))
 
+	// Удаляем файл logTostringIp.log
+	err = os.Remove("logTostringIp.log")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Был удалён файл logTostringIp.log")
+
+	// Переименуем файл newlogTostringIp.log в logTostringIp.log
+	err = os.Rename("newlogTostringIp.log", "logTostringIp.log")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Файл newlogTostringIp.log был переименован в logTostringIp.log")
+
 }
