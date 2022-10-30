@@ -30,11 +30,16 @@ func main() {
 	fmt.Printf("Pattern: %v\n", pRe.String()) // print pattern
 	fmt.Println(pRe.MatchString(str1))        // true
 
+	// Создаём файл, в который будем записывать строковую переменую
+	// со списком ip-адресов
+
 	createLogFile, err := os.Create("logTostringIp.log")
 	if err != nil {
 		panic(err)
 	}
 	defer createLogFile.Close()
+
+	// Осуществляем запись ip-адресов в файл
 
 	submatchall := pRe.FindAllString(str1, -1)
 	for _, element := range submatchall {
@@ -84,4 +89,22 @@ func main() {
 	}
 	fmt.Println("Файл newlogTostringIp.log был переименован в logTostringIp.log")
 
+	//-------------Блок считает пробелы в переменной-------------------
+	// Это позволяет определить количество ip-адресов в файле
+	ipList, err = ioutil.ReadFile("logTostringIp.log")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	listIpInString = string(ipList)
+	fmt.Println("--------------------------------------------------------")
+	fmt.Println("--------------------------------------------------------")
+	fmt.Println("Эти данные выводятся до применения цикла for:")
+	spacesInString := strings.Count(listIpInString, " ")
+	fmt.Println("Количество пробелов в строке listIpInString =", spacesInString)
+	//fmt.Println("Количество пробелов в строке listIpInString =", strings.Count(listIpInString, " "))
+	fmt.Println("--------------------------------------------------------")
+	fmt.Println("--------------------------------------------------------")
+	//---------------------------------------------------------------------
 }
