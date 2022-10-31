@@ -114,6 +114,58 @@ func main() {
 	takeFirstIp = strings.ReplaceAll(takeFirstIp, " ", "")
 	fmt.Println(takeFirstIp, "- Выводим переменную takeFirstIp")
 
-	// Далее необходимо вывести структуру строки 73
-	// и посчитать количество символов переменной takeFirstIp
+	// Создаём структуру с массивом ip-адресов и
+	// массив с индексом массива
+	type IpList struct {
+		ipInStringArr [500]string // Сюда будем помещать ip-адреса
+		indexForArr   int         // Индекс массива ipInStringArr
+	}
+
+	a := new(IpList)  // Инициализация структуры IpList
+	a.indexForArr = 0 // Индекс массива, который будет увеличиваться инкрементом
+	// после того как строка с ip-адресом будет положена в массив.
+	a.ipInStringArr[a.indexForArr] = takeFirstIp
+	fmt.Print("Массиву с индексом [", a.indexForArr, "] было присвоено значение ", a.ipInStringArr[0], "\n")
+	fmt.Println("--------------------------------------------------------")
+
+	// Считаем количество символов ip-адреса в переменной takeFirstIp
+	howManyLetters := (len(takeFirstIp)) + 1
+	fmt.Println("В строке ", takeFirstIp, "-", howManyLetters, "символов.")
+
+	// Теперь удалим количество знаков переменной howManyLetters
+	// из строчной переменной listIpInString
+	subListIpInString := listIpInString[howManyLetters:]
+	fmt.Println("Из строки listIpInString было удалено ", howManyLetters, "символов")
+
+	// Теперь создадим новый файл и запишем в него строчную переменную subListIpInString для проверки
+	createNewLogFile, err = os.Create("newlogTostringIp.log")
+	if err != nil {
+		panic(err)
+	}
+	defer createNewLogFile.Close()
+
+	createNewLogFile.Write([]byte(subListIpInString))
+	fmt.Println("Был создан временный файл newlogTostringIp.log,")
+	fmt.Println("в который была записана изменённая переменная \nlistIpInString")
+	fmt.Println("--------------------------------------------------------")
+
+	// Удаляем файл logTostringIp.log
+	err = os.Remove("logTostringIp.log")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Был удалён файл logTostringIp.log")
+
+	// Переименуем файл newlogTostringIp.log в logTostringIp.log
+	err = os.Rename("newlogTostringIp.log", "logTostringIp.log")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Файл newlogTostringIp.log был переименован в logTostringIp.log")
+
+	// Далее нужно добавить цикл for, который перенесёт ip-адреса в
+	// массив ipInStringArr
+
 }
