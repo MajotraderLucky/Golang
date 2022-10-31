@@ -107,4 +107,12 @@ func main() {
 	fmt.Println("--------------------------------------------------------")
 	fmt.Println("--------------------------------------------------------")
 	//---------------------------------------------------------------------
+
+	// Получаем первый ip-адрес из переменной listIpInString
+	takeFirstIp := pRe.FindString(listIpInString)
+	// Удалим пробелы, если есть, в строчной переменной takeFirstIp
+	takeFirstIp = strings.ReplaceAll(takeFirstIp, " ", "")
+	fmt.Println(takeFirstIp, "- Выводим переменную takeFirstIp")
+
+	// Далее необходимо вывести структуру строки 73
 }
