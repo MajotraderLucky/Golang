@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	takeContent, err := ioutil.ReadFile("/home/sergey/Downloads/tdlfFile.txt") // Берем данные из лог-файла
+	takeContent, err := ioutil.ReadFile("/home/sergey/Downloads/auth.log") // Берем данные из лог-файла
 
 	if err != nil {
 		log.Fatal(err)
