@@ -177,7 +177,7 @@ func main() {
 	fmt.Println("Запускаем цикл for")
 	fmt.Println("--------------------------------------------------------")
 
-	for i := 2500; i >= 0; i-- {
+	for i := 1000; i >= 0; i-- {
 		ipList, err = ioutil.ReadFile("logTostringIp.log")
 
 		if err != nil {
@@ -223,4 +223,26 @@ func main() {
 	fmt.Println("--------------------------------------------------------")
 	fmt.Println("Выводим массив ipInStringArr ", a.ipInStringArr[0:50])
 	fmt.Println("--------------------------------------------------------")
+
+	//-------------Блок считает пробелы в переменной-------------------
+	// Это позволяет определить количество ip-адресов в файле
+	ipList, err = ioutil.ReadFile("logTostringIp.log")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	listIpInString = string(ipList)
+	fmt.Println("--------------------------------------------------------")
+	fmt.Println("--------------------------------------------------------")
+	fmt.Println("Эти данные выводятся до применения цикла for:")
+	spacesInString = strings.Count(listIpInString, " ")
+	fmt.Println("Количество пробелов в строке listIpInString =", spacesInString)
+	//fmt.Println("Количество пробелов в строке listIpInString =", strings.Count(listIpInString, " "))
+	fmt.Println("--------------------------------------------------------")
+	fmt.Println("--------------------------------------------------------")
+	//---------------------------------------------------------------------
+
+	// Далее необходимо определить, сколько раз повторяется ip-адрес в массиве
+	// ipInStringArr
 }
