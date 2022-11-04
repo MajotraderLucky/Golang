@@ -324,11 +324,8 @@ func main() {
 		a.indexForArr++
 		fmt.Println("Индекс массива теперь составляет", a.indexForArr)
 
-		// Дальше посчитаем, количество символов в строчной переменной
-		// takeFirstIp
-		howManyLetters = (len(takeFirstIp)) + 1 // В предыдущем действии
-		// нужно было добавлять +2, но в этом удалении был удалён один лишний
-		// символ. Нужно разобраться в этой ошибке.
+		// Дальше посчитаем, количество символов в строчной переменной takeFirstIp
+		howManyLetters = (len(takeFirstIp)) + 1
 		fmt.Println("В строке ", takeFirstIp, "-", howManyLetters, "символов.")
 
 		// Теперь удалим количество знаков переменной howManyLetters

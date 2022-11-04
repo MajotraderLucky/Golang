@@ -117,8 +117,8 @@ func main() {
 	// Создаём структуру с массивом ip-адресов и
 	// массив с индексом массива
 	type IpList struct {
-		ipInStringArr [500]string // Сюда будем помещать ip-адреса
-		indexForArr   int         // Индекс массива ipInStringArr
+		ipInStringArr [100000]string // Сюда будем помещать ip-адреса
+		indexForArr   int            // Индекс массива ipInStringArr
 	}
 
 	a := new(IpList)  // Инициализация структуры IpList
@@ -126,6 +126,8 @@ func main() {
 	// после того как строка с ip-адресом будет положена в массив.
 	a.ipInStringArr[a.indexForArr] = takeFirstIp
 	fmt.Print("Массиву с индексом [", a.indexForArr, "] было присвоено значение ", a.ipInStringArr[0], "\n")
+	// a.indexForArr++
+	// fmt.Println("Индекс массива indexForArr увеличился =", a.indexForArr)
 	fmt.Println("--------------------------------------------------------")
 
 	// Считаем количество символов ip-адреса в переменной takeFirstIp
@@ -168,4 +170,57 @@ func main() {
 	// Далее нужно добавить цикл for, который перенесёт ip-адреса в
 	// массив ipInStringArr
 
+	// В цикле for должны повторятся действия по извлечению, удалению
+	// и добавлению ip в масиив ipInStringArr
+
+	fmt.Println("--------------------------------------------------------")
+	fmt.Println("Запускаем цикл for")
+	fmt.Println("--------------------------------------------------------")
+
+	for i := 2500; i >= 0; i-- {
+		ipList, err = ioutil.ReadFile("logTostringIp.log")
+
+		if err != nil {
+			log.Fatal(err)
+		}
+		listIpInString = string(ipList)
+		takeFirstIp = pRe.FindString(listIpInString)
+
+		// Удалим пробелы, если есть, в строчной переменной takeFirstIp
+		takeFirstIp = strings.ReplaceAll(takeFirstIp, " ", "")
+
+		a.indexForArr++
+		a.ipInStringArr[a.indexForArr] = takeFirstIp
+		// Дальше посчитаем, количество символов в строчной переменной takeFirstIp
+		howManyLetters = (len(takeFirstIp)) + 1
+		// Теперь удалим количество знаков переменной howManyLetters
+		// из строчной переменной listIpInString
+		subListIpInString = listIpInString[howManyLetters:]
+		// Создаём новый файл newlogTostringIp.log и записываем в него subListIpInString
+		createNewLogFile, err = os.Create("newlogTostringIp.log")
+		if err != nil {
+			panic(err)
+		}
+		defer createNewLogFile.Close()
+
+		createNewLogFile.Write([]byte(subListIpInString))
+
+		// Удаляем файл logTostringIp.log и переименовываем файл newlogTostringIp.log
+		// в logTostringIp.log
+		err = os.Remove("logTostringIp.log")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		// Переименуем файл newlogTostringIp.log в logTostringIp.log
+		err = os.Rename("newlogTostringIp.log", "logTostringIp.log")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+	}
+	fmt.Println("--------------------------------------------------------")
+	fmt.Println("Выводим массив ipInStringArr ", a.ipInStringArr[0:50])
+	fmt.Println("--------------------------------------------------------")
 }
