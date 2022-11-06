@@ -177,7 +177,7 @@ func main() {
 	fmt.Println("Запускаем цикл for")
 	fmt.Println("--------------------------------------------------------")
 
-	for i := 1000; i >= 0; i-- {
+	for i := 2000; i >= 0; i-- {
 		ipList, err = ioutil.ReadFile("logTostringIp.log")
 
 		if i%10 == 0 {
@@ -252,5 +252,14 @@ func main() {
 	// Далее отсортируем ip-адреса и добавим в срез, откуда
 	// сделаем вывод с результатом подсчёта, сколько раз повторяется
 	// ip в массиве.
+
+	type SortIpList struct {
+		sortIpSlise  []string // Сюда будем складывать отсортированные ip-адреса
+		indexIpSlice int
+	}
+	s := new(SortIpList) // Инициализация структуры
+	s.indexIpSlice = 0
+	s.sortIpSlise = append(s.sortIpSlise, a.ipInStringArr[s.indexIpSlice])
+	fmt.Println("Срез sortIpSlise =", s.sortIpSlise)
 
 }
