@@ -180,6 +180,10 @@ func main() {
 	for i := 1000; i >= 0; i-- {
 		ipList, err = ioutil.ReadFile("logTostringIp.log")
 
+		if i%10 == 0 {
+			fmt.Print(".")
+		}
+
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -220,6 +224,7 @@ func main() {
 		}
 
 	}
+	fmt.Println(" ")
 	fmt.Println("--------------------------------------------------------")
 	fmt.Println("Выводим массив ipInStringArr ", a.ipInStringArr[0:50])
 	fmt.Println("--------------------------------------------------------")
