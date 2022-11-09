@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	takeContent, err := ioutil.ReadFile("/home/sergey/Downloads/auth.log") // Берем данные из лог-файла
+	takeContent, err := ioutil.ReadFile("/home/ryazanov/Downloads/tdlfFile.txt") // Берем данные из лог-файла
 
 	if err != nil {
 		log.Fatal(err)
@@ -177,7 +177,7 @@ func main() {
 	fmt.Println("Запускаем цикл for")
 	fmt.Println("--------------------------------------------------------")
 
-	for i := 2000; i >= 0; i-- {
+	for i := spacesInString - 2; i >= 0; i-- {
 		ipList, err = ioutil.ReadFile("logTostringIp.log")
 
 		if i%10 == 0 {
@@ -254,12 +254,28 @@ func main() {
 	// ip в массиве.
 
 	type SortIpList struct {
-		sortIpSlise  []string // Сюда будем складывать отсортированные ip-адреса
-		indexIpSlice int
+		sortIpSlise       []string // Сюда будем складывать отсортированные ip-адреса
+		indexIpSlice      int
+		repetitionCounter []int // Счётчик повторений ip-адресов в срезе
+		indexCounter      int
 	}
 	s := new(SortIpList) // Инициализация структуры
 	s.indexIpSlice = 0
+	s.indexCounter = 0
+	s.repetitionCounter = append(s.repetitionCounter, 1) // Проверяемый ip повторяется 1 раз
+	// Присваиваем первому элементу среза первый элемент массива ipInStringArr
 	s.sortIpSlise = append(s.sortIpSlise, a.ipInStringArr[s.indexIpSlice])
-	fmt.Println("Срез sortIpSlise =", s.sortIpSlise)
-
+	//s.repetitionCounter[0] += 1
+	for i := 0; i <= 20; i++ {
+		// fmt.Println("Выводим первый элемент среза ", s.sortIpSlise[s.indexIpSlice])
+		// fmt.Println("Сравниваем со вторым элементом массива ", a.ipInStringArr[s.indexIpSlice+1])
+		if s.sortIpSlise[0] != a.ipInStringArr[i] {
+			fmt.Println(s.sortIpSlise[0], "!=", a.ipInStringArr[i])
+		} else if s.sortIpSlise[0] == a.ipInStringArr[i] {
+			fmt.Println(s.sortIpSlise[0], "==", a.ipInStringArr[i])
+		} else {
+			fmt.Println("Ошибка сравнения", a.ipInStringArr[i])
+		}
+	}
+	
 }
