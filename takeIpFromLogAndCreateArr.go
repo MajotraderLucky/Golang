@@ -174,7 +174,7 @@ func main() {
 	// и добавлению ip в масиив ipInStringArr
 
 	fmt.Println("--------------------------------------------------------")
-	fmt.Println("Запускаем цикл for")
+	fmt.Println("                 Запускаем цикл for")
 	fmt.Println("--------------------------------------------------------")
 
 	for i := spacesInString - 2; i >= 0; i-- {
@@ -266,7 +266,9 @@ func main() {
 	// Присваиваем первому элементу среза первый элемент массива ipInStringArr
 	s.sortIpSlise = append(s.sortIpSlise, a.ipInStringArr[s.indexIpSlice])
 	//s.repetitionCounter[0] += 1
-	for i := 0; i <= 100; i++ {
+	var i int
+
+	for i = 0; i <= 200; i++ {
 		// fmt.Println("Выводим первый элемент среза ", s.sortIpSlise[s.indexIpSlice])
 		// fmt.Println("Сравниваем со вторым элементом массива ", a.ipInStringArr[s.indexIpSlice+1])
 		if s.sortIpSlise[s.indexIpSlice] != a.ipInStringArr[i] {
@@ -281,4 +283,16 @@ func main() {
 	}
 	fmt.Println("")
 	fmt.Println(s.sortIpSlise[s.indexIpSlice], "повторяется", s.repetitionCounter[s.indexIpSlice], "раз")
+	s.indexIpSlice += 1
+
+	//fmt.Println(s.sortIpSlise[s.indexIpSlice])
+	v := s.sortIpSlise[s.indexIpSlice-1]
+
+	// Если второй элемент массива не равен первому элементу среза, добавляем
+	u := a.ipInStringArr[s.indexIpSlice]
+	
+	if v != u {
+		s.sortIpSlise = append(s.sortIpSlise, a.ipInStringArr[s.indexIpSlice])
+		fmt.Println(s.sortIpSlise)
+	}
 }
