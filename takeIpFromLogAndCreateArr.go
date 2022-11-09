@@ -266,16 +266,19 @@ func main() {
 	// Присваиваем первому элементу среза первый элемент массива ipInStringArr
 	s.sortIpSlise = append(s.sortIpSlise, a.ipInStringArr[s.indexIpSlice])
 	//s.repetitionCounter[0] += 1
-	for i := 0; i <= 20; i++ {
+	for i := 0; i <= 100; i++ {
 		// fmt.Println("Выводим первый элемент среза ", s.sortIpSlise[s.indexIpSlice])
 		// fmt.Println("Сравниваем со вторым элементом массива ", a.ipInStringArr[s.indexIpSlice+1])
-		if s.sortIpSlise[0] != a.ipInStringArr[i] {
-			fmt.Println(s.sortIpSlise[0], "!=", a.ipInStringArr[i])
-		} else if s.sortIpSlise[0] == a.ipInStringArr[i] {
-			fmt.Println(s.sortIpSlise[0], "==", a.ipInStringArr[i])
+		if s.sortIpSlise[s.indexIpSlice] != a.ipInStringArr[i] {
+			fmt.Print(".")
+		} else if s.sortIpSlise[s.indexIpSlice] == a.ipInStringArr[i] {
+			s.repetitionCounter[s.indexIpSlice] += 1
+			//fmt.Println(s.sortIpSlise[s.indexIpSlice], "==", a.ipInStringArr[i])
 		} else {
 			fmt.Println("Ошибка сравнения", a.ipInStringArr[i])
+			break
 		}
 	}
-	
+	fmt.Println("")
+	fmt.Println(s.sortIpSlise[s.indexIpSlice], "повторяется", s.repetitionCounter[s.indexIpSlice], "раз")
 }
