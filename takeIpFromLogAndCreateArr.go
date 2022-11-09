@@ -290,9 +290,23 @@ func main() {
 
 	// Если второй элемент массива не равен первому элементу среза, добавляем
 	u := a.ipInStringArr[s.indexIpSlice]
-	
+
 	if v != u {
 		s.sortIpSlise = append(s.sortIpSlise, a.ipInStringArr[s.indexIpSlice])
 		fmt.Println(s.sortIpSlise)
 	}
+	//fmt.Println(s.sortIpSlise[s.indexIpSlice])
+	s.repetitionCounter = append(s.repetitionCounter, 1)
+
+	for i = s.indexIpSlice + 1; i <= 200; i++ {
+		if s.sortIpSlise[s.indexIpSlice] == a.ipInStringArr[i] {
+			s.repetitionCounter[s.indexIpSlice] += 1
+			fmt.Print("-")
+		} else {
+			fmt.Print(".")
+		}
+	}
+	fmt.Println("")
+	fmt.Println(s.sortIpSlise[s.indexIpSlice], "повторяется", s.repetitionCounter[s.indexIpSlice], "раз")
+	s.indexIpSlice += 1
 }
