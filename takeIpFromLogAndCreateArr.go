@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	takeContent, err := ioutil.ReadFile("/home/ryazanov/Downloads/tdlfFile.txt") // Берем данные из лог-файла
+	takeContent, err := ioutil.ReadFile("/home/sergey/Downloads/auth.log") // Берем данные из лог-файла
 
 	if err != nil {
 		log.Fatal(err)
@@ -177,7 +177,7 @@ func main() {
 	fmt.Println("                 Запускаем цикл for")
 	fmt.Println("--------------------------------------------------------")
 
-	for i := spacesInString - 2; i >= 0; i-- {
+	for i := 1000; i >= 0; i-- {
 		ipList, err = ioutil.ReadFile("logTostringIp.log")
 
 		if i%10 == 0 {
