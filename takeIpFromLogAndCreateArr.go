@@ -339,4 +339,41 @@ func main() {
 	fmt.Println(s.sortIpSlise[s.indexIpSlice], "повторяется", s.repetitionCounter[s.indexIpSlice], "раз")
 	s.indexIpSlice += 1
 
+	for z := 0; z <= 3; z++ {
+		// Ниже идёт повторяющийся блок, который вылетает, если ip повторяется
+		// необходима проверка
+		//--------------------------Повторяющийся блок----------------------------
+		count = 0
+		for i = len(s.sortIpSlise) - 1; i >= 0; i-- {
+			if a.ipInStringArr[s.indexIpSlice] != s.sortIpSlise[i] {
+				count += 1
+			}
+		}
+		// fmt.Println(count)
+
+		// Добавляем новый элемент массива в срез только в том случае, если
+		// такой же ip ещё не был добавлен
+		if len(s.sortIpSlise) == count {
+			s.sortIpSlise = append(s.sortIpSlise, a.ipInStringArr[s.indexIpSlice])
+		} else {
+			s.indexIpSlice += 1
+			continue
+		}
+		fmt.Println(s.sortIpSlise)
+
+		s.repetitionCounter = append(s.repetitionCounter, 1)
+
+		for i = s.indexIpSlice + 1; i <= 200; i++ {
+			if s.sortIpSlise[s.indexIpSlice] == a.ipInStringArr[i] {
+				s.repetitionCounter[s.indexIpSlice] += 1
+				fmt.Print("-")
+			} else {
+				fmt.Print(".")
+			}
+		}
+		fmt.Println("")
+		fmt.Println(s.sortIpSlise[s.indexIpSlice], "повторяется", s.repetitionCounter[s.indexIpSlice], "раз")
+		s.indexIpSlice += 1
+		//------------------------------------------------------------------------
+	}
 }
