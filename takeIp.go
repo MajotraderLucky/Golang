@@ -115,10 +115,62 @@ func main() {
 	// Создаём структуру с массивом ip-адресов и
 	// массив с индексом массива
 	type IpList struct {
-		ipInStringArr []string // Сюда будем помещать ip-адреса
-		indexForSlice int      // Индекс массива ipInStringArr
+		ipInStringSlice []string // Сюда будем помещать ip-адреса
+		indexForSlice   int      // Индекс массива ipInStringArr
 	}
 
 	a := new(IpList)    // Инициализация структуры IpList
-	a.indexForSlice = 0 // Индекс среза
+	a.indexForSlice = 0 // Индекс среза начинается с 0
+	// Положим ip из takeFirstIp в срез
+	a.ipInStringSlice = append(a.ipInStringSlice, takeFirstIp)
+	fmt.Println(a.ipInStringSlice)
+	fmt.Println("--------------------------------------------------------")
+
+	// Считаем количество символов ip-адреса в переменной takeFirstIp
+	howManyLetters := (len(takeFirstIp)) + 1
+	fmt.Println("В строке ", takeFirstIp, "-", howManyLetters, "символов вместе с пробелом")
+	// Теперь удалим количество знаков переменной howManyLetters
+	// из строчной переменной listIpInString
+	subListIpInString := listIpInString[howManyLetters:]
+	fmt.Println("Из строки listIpInString было удалено ", howManyLetters, "символов")
+	fmt.Println("--------------------------------------------------------")
+
+	for i := 0; i <= 30000; i++ {
+		//--------------------Повторяющийся блок-----------------------------
+		// Получаем первый ip теперь из переменной subListIpInString
+		takeFirstIp = pRe.FindString(subListIpInString)
+		// Удалим пробелы, если есть, в строчной переменной takeFirstIp
+		takeFirstIp = strings.ReplaceAll(takeFirstIp, " ", "")
+		//fmt.Println(takeFirstIp, "- Выводим переменную takeFirstIp")
+		// Положим ip из takeFirstIp в срез
+		a.ipInStringSlice = append(a.ipInStringSlice, takeFirstIp)
+		//fmt.Println(a.ipInStringSlice)
+		//fmt.Println("--------------------------------------------------------")
+		// Считаем количество символов ip-адреса в переменной takeFirstIp
+		howManyLetters = (len(takeFirstIp)) + 1
+		//fmt.Println("В строке ", takeFirstIp, "-", howManyLetters, "символов вместе с пробелом")
+		// Теперь удалим количество знаков переменной howManyLetters
+		// из строчной переменной subListIpInString
+		listIpInString = subListIpInString[howManyLetters:]
+		//fmt.Println("Из строки subListIpInString было удалено ", howManyLetters, "символов")
+		//fmt.Println("--------------------------------------------------------")
+		takeFirstIp = pRe.FindString(listIpInString)
+		// Удалим пробелы, если есть, в строчной переменной takeFirstIp
+		takeFirstIp = strings.ReplaceAll(takeFirstIp, " ", "")
+		// Положим ip из takeFirstIp в срез
+		a.ipInStringSlice = append(a.ipInStringSlice, takeFirstIp)
+		//fmt.Println(a.ipInStringSlice)
+		//fmt.Println("--------------------------------------------------------")
+		// Считаем количество символов ip-адреса в переменной takeFirstIp
+		howManyLetters = (len(takeFirstIp)) + 1
+		subListIpInString = listIpInString[howManyLetters:]
+		if i%100 == 0 {
+			fmt.Print("*")
+		}
+		//--------------------Конец повторяющегося блока-----------------------
+	}
+	fmt.Println("")
+	fmt.Println("Длинна среза ip-адресов =", len(a.ipInStringSlice))
+	//f := a.indexForSlice[0:30]
+	fmt.Println(a.ipInStringSlice[:40])
 }
