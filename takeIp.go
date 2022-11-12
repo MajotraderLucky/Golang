@@ -134,8 +134,9 @@ func main() {
 	subListIpInString := listIpInString[howManyLetters:]
 	fmt.Println("Из строки listIpInString было удалено ", howManyLetters, "символов")
 	fmt.Println("--------------------------------------------------------")
+	halfSpacesInString := spacesInString / 2
 
-	for i := 0; i <= 30000; i++ {
+	for i := 0; i <= halfSpacesInString-2; i++ {
 		//--------------------Повторяющийся блок-----------------------------
 		// Получаем первый ip теперь из переменной subListIpInString
 		takeFirstIp = pRe.FindString(subListIpInString)
@@ -171,6 +172,16 @@ func main() {
 	}
 	fmt.Println("")
 	fmt.Println("Длинна среза ip-адресов =", len(a.ipInStringSlice))
-	//f := a.indexForSlice[0:30]
-	fmt.Println(a.ipInStringSlice[:40])
+	fmt.Println(a.ipInStringSlice[:50])
+	fmt.Println("Всего ip =", spacesInString)
+
+	//-----------Блок подсчёта запросов с одного ip-адреса-----------------------
+	type CountingRequests struct {
+		ipTable       []string // Срез для ip, которые были посчитаны
+		indexIpTables []int    // Индекс среза ipTable
+	}
+
+	c := new(CountingRequests)
+	c.ipTable = append(c.ipTable, a.ipInStringSlice[0])
+	fmt.Println(c.ipTable)
 }
