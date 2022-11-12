@@ -195,4 +195,6 @@ func main() {
 		}
 	}
 	fmt.Println(c.counter)
+	c.countsIpTables = append(c.countsIpTables, c.counter)
+	fmt.Println(c.countsIpTables)
 }
