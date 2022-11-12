@@ -196,5 +196,24 @@ func main() {
 	}
 	fmt.Println(c.counter)
 	c.countsIpTables = append(c.countsIpTables, c.counter)
-	fmt.Println(c.countsIpTables)
+	fmt.Println(len(c.countsIpTables))
+	c.counter = 0
+	for i := 0; i <= halfSpacesInString-2; i++ {
+		if c.ipTable[c.indexIpTable] != a.ipInStringSlice[i] {
+			c.ipTable = append(c.ipTable, a.ipInStringSlice[i])
+			break
+		}
+	}
+	fmt.Println(c.ipTable)
+	c.indexIpTable += 1
+	for i := 0; i <= halfSpacesInString-2; i++ {
+		if c.ipTable[c.indexIpTable] == a.ipInStringSlice[i] {
+			c.counter += 1
+		}
+	}
+	fmt.Println(c.counter)
+	c.countsIpTables = append(c.countsIpTables, c.counter)
+	fmt.Println(len(c.countsIpTables))
+	c.counter = 0
+	fmt.Println(c.ipTable[c.indexIpTable])
 }
