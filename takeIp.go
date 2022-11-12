@@ -177,11 +177,22 @@ func main() {
 
 	//-----------Блок подсчёта запросов с одного ip-адреса-----------------------
 	type CountingRequests struct {
-		ipTable       []string // Срез для ip, которые были посчитаны
-		indexIpTables []int    // Индекс среза ipTable
+		ipTable        []string // Срез для ip, которые были посчитаны
+		countsIpTables []int    // Количество повторений ip ipTable
+		indexIpTable   int
+		counter        int
 	}
 
 	c := new(CountingRequests)
+	c.indexIpTable = 0
+	//c.countsIpTables = append(c.countsIpTables, 0)
 	c.ipTable = append(c.ipTable, a.ipInStringSlice[0])
-	fmt.Println(c.ipTable)
+	fmt.Println(c.ipTable[c.indexIpTable])
+
+	for i := 0; i <= halfSpacesInString-2; i++ {
+		if c.ipTable[c.indexIpTable] == a.ipInStringSlice[i] {
+			c.counter += 1
+		}
+	}
+	fmt.Println(c.counter)
 }
