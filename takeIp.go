@@ -220,5 +220,16 @@ func main() {
 	// На данном этапе корректно проверено два элемента массива
 	//Теперь надо проверить следующий элемент среза, - повторяется ли он в срезе
 	//ipTables
-	
+	c.indexIpInStringSlice += 1
+	fmt.Println(c.ipTable[c.indexIpTable])
+
+	for i := c.indexIpTable; i >= 0; i-- {
+		if a.ipInStringSlice[c.indexIpInStringSlice] == c.ipTable[i] {
+			c.indexIpInStringSlice += 1
+		} else {
+			c.ipTable = append(c.ipTable, a.ipInStringSlice[c.indexIpInStringSlice])
+			break
+		}
+	}
+	fmt.Println(c.ipTable)
 }
