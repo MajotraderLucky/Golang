@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	takeContent, err := ioutil.ReadFile("/home/sergey/Downloads/auth.log") // Берем данные из лог-файла
+	takeContent, err := ioutil.ReadFile("/home/ryazanov/Downloads/tdlfFile.txt") // Берем данные из лог-файла
 
 	if err != nil {
 		log.Fatal(err)
@@ -177,43 +177,20 @@ func main() {
 
 	//-----------Блок подсчёта запросов с одного ip-адреса-----------------------
 	type CountingRequests struct {
-		ipTable        []string // Срез для ip, которые были посчитаны
-		countsIpTables []int    // Количество повторений ip ipTable
-		indexIpTable   int
-		counter        int
+		ipTable              []string // Срез для ip, которые были посчитаны
+		countsIpTables       []int    // Количество повторений ip ipTable
+		indexIpTable         int
+		counter              int
+		indexIpInStringSlice int
 	}
 
 	c := new(CountingRequests)
 	c.indexIpTable = 0
-	//c.countsIpTables = append(c.countsIpTables, 0)
 	c.ipTable = append(c.ipTable, a.ipInStringSlice[0])
-	fmt.Println(c.ipTable[c.indexIpTable])
-
-	for i := 0; i <= halfSpacesInString-2; i++ {
-		if c.ipTable[c.indexIpTable] == a.ipInStringSlice[i] {
-			c.counter += 1
-		}
-	}
-	fmt.Println(c.counter)
-	c.countsIpTables = append(c.countsIpTables, c.counter)
-	fmt.Println(len(c.countsIpTables))
-	c.counter = 0
-	for i := 0; i <= halfSpacesInString-2; i++ {
-		if c.ipTable[c.indexIpTable] != a.ipInStringSlice[i] {
-			c.ipTable = append(c.ipTable, a.ipInStringSlice[i])
-			break
-		}
-	}
 	fmt.Println(c.ipTable)
-	c.indexIpTable += 1
-	for i := 0; i <= halfSpacesInString-2; i++ {
-		if c.ipTable[c.indexIpTable] == a.ipInStringSlice[i] {
-			c.counter += 1
-		}
-	}
-	fmt.Println(c.counter)
-	c.countsIpTables = append(c.countsIpTables, c.counter)
-	fmt.Println(len(c.countsIpTables))
-	c.counter = 0
-	fmt.Println(c.ipTable[c.indexIpTable])
+	c.countsIpTables = append(c.countsIpTables, 1)
+	// Проверим, сколько первый элемент списка повторяется в срезе a.ipInStringSlice
+	c.indexIpInStringSlice = 0 // индекс среза, в котором хранятся ip
+	c.indexIpInStringSlice += 1
+	fmt.Println(c.indexIpInStringSlice)
 }
