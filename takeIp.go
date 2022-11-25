@@ -190,7 +190,32 @@ func main() {
 	fmt.Println(c.ipTable)
 	c.countsIpTables = append(c.countsIpTables, 1)
 	// Проверим, сколько первый элемент списка повторяется в срезе a.ipInStringSlice
-	c.indexIpInStringSlice = 0 // индекс среза, в котором хранятся ip
-	c.indexIpInStringSlice += 1
-	fmt.Println(c.indexIpInStringSlice)
+	c.indexIpInStringSlice = 1 // индекс среза, в котором хранятся ip
+	fmt.Println(spacesInString)
+	fmt.Println(c.ipTable[0])
+	c.counter = 1
+	c.indexIpTable = 0
+
+	for i := spacesInString - 3; i > 0; i-- {
+		if c.ipTable[c.indexIpTable] == a.ipInStringSlice[i] {
+			c.counter += 1
+		}
+	}
+	fmt.Println("ip-адрес -", c.ipTable[c.indexIpTable], "повторяется", c.counter, "раз")
+	if c.ipTable[c.indexIpTable] != a.ipInStringSlice[c.indexIpInStringSlice] {
+		c.ipTable = append(c.ipTable, a.ipInStringSlice[c.indexIpInStringSlice])
+	}
+	fmt.Println(c.ipTable)
+	c.indexIpTable += 1
+	c.counter = 1
+
+	for i := spacesInString - 3; i > 0; i-- {
+		if c.ipTable[c.indexIpTable] == a.ipInStringSlice[i] {
+			c.counter += 1
+		}
+	}
+	fmt.Println("ip-адрес -", c.ipTable[c.indexIpTable], "повторяется", c.counter, "раз")
+	c.countsIpTables = append(c.countsIpTables, c.counter)
+	fmt.Println(c.countsIpTables)
+	// На данном этапе корректно проверено два элемента массива
 }
