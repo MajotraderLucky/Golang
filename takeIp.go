@@ -218,4 +218,7 @@ func main() {
 	c.countsIpTables = append(c.countsIpTables, c.counter)
 	fmt.Println(c.countsIpTables)
 	// На данном этапе корректно проверено два элемента массива
+	//Теперь надо проверить следующий элемент среза, - повторяется ли он в срезе
+	//ipTables
+	
 }
