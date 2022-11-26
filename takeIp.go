@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-// Попробую использовать функцию для сравнения строки с элементами массива
+// Функция для сравнения строки с элементами массива
 func Contains(a []string, x string) bool {
 	for _, n := range a {
 		if x == n {
@@ -293,9 +293,21 @@ func main() {
 	fmt.Println(a.ipInStringSlice[c.indexIpInStringSlice])
 	fmt.Println(c.indexIpTable)
 
-	f := c.ipTable
-	g := a.ipInStringSlice[c.indexIpInStringSlice]
+	//---Новый блок поиска уникальных ip-адресов для добавления их в срез ipTable------
+	for {
+		f := c.ipTable
+		g := a.ipInStringSlice[c.indexIpInStringSlice]
 
-	result := Contains(f, g)
-	fmt.Println(result)
+		result := Contains(f, g)
+		fmt.Println(result)
+		if result == true {
+			c.indexIpInStringSlice += 1
+			continue
+		} else {
+			c.ipTable = append(c.ipTable, a.ipInStringSlice[c.indexIpInStringSlice])
+			break
+		}
+		// --------------Конец нового блока поиска уникальных ip---------------------------
+	}
+	fmt.Println(c.ipTable)
 }
