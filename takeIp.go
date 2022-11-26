@@ -106,12 +106,7 @@ func main() {
 	}
 
 	listIpInString = string(ipList)
-	fmt.Println("--------------------------------------------------------")
-	fmt.Println("--------------------------------------------------------")
-	fmt.Println("Эти данные выводятся до применения цикла for:")
 	spacesInString := strings.Count(listIpInString, " ")
-	fmt.Println("Количество пробелов в строке listIpInString =", spacesInString)
-	//fmt.Println("Количество пробелов в строке listIpInString =", strings.Count(listIpInString, " "))
 	fmt.Println("--------------------------------------------------------")
 	fmt.Println("--------------------------------------------------------")
 	//---------------------------------------------------------------------
@@ -120,7 +115,6 @@ func main() {
 	takeFirstIp := pRe.FindString(listIpInString)
 	// Удалим пробелы, если есть, в строчной переменной takeFirstIp
 	takeFirstIp = strings.ReplaceAll(takeFirstIp, " ", "")
-	fmt.Println(takeFirstIp, "- Выводим переменную takeFirstIp")
 
 	// Создаём структуру с массивом ip-адресов и
 	// массив с индексом массива
@@ -133,17 +127,12 @@ func main() {
 	a.indexForSlice = 0 // Индекс среза начинается с 0
 	// Положим ip из takeFirstIp в срез
 	a.ipInStringSlice = append(a.ipInStringSlice, takeFirstIp)
-	fmt.Println(a.ipInStringSlice)
-	fmt.Println("--------------------------------------------------------")
 
 	// Считаем количество символов ip-адреса в переменной takeFirstIp
 	howManyLetters := (len(takeFirstIp)) + 1
-	fmt.Println("В строке ", takeFirstIp, "-", howManyLetters, "символов вместе с пробелом")
 	// Теперь удалим количество знаков переменной howManyLetters
 	// из строчной переменной listIpInString
 	subListIpInString := listIpInString[howManyLetters:]
-	fmt.Println("Из строки listIpInString было удалено ", howManyLetters, "символов")
-	fmt.Println("--------------------------------------------------------")
 	halfSpacesInString := spacesInString / 2
 
 	for i := 0; i <= halfSpacesInString-2; i++ {
@@ -212,7 +201,7 @@ func main() {
 				// --------------Конец нового блока поиска уникальных ip---------------------------
 			}
 
-			//-----------Блок подсчёта повторений ip-фдреса--------------------------------
+			//-----------Блок подсчёта повторений ip-адреса--------------------------------
 
 			c.indexIpTable += 1
 			c.counter = 1
@@ -229,4 +218,21 @@ func main() {
 	fmt.Println(c.ipTable)
 	fmt.Println(c.countsIpTables)
 	fmt.Println(len(c.ipTable))
+
+	// Далее выводим результат, - сколько запросов с каждого уникального ip
+	lenUnicIpTable := len(c.ipTable)
+	c.indexIpTable = 0
+	fmt.Println(ten)
+	for p := lenUnicIpTable - 1; p >= 0; p-- {
+		fmt.Print(c.ipTable[p])
+		for l := 20 - len(c.ipTable[p]); l >= 0; l-- {
+
+			fmt.Print(" ")
+		}
+		fmt.Print(" - (", c.countsIpTables[p], ")           - ")
+		for i := c.countsIpTables[p]; i > 0; i-- {
+			fmt.Print("|")
+		}
+		fmt.Println("")
+	}
 }
