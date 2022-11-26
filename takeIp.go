@@ -244,7 +244,7 @@ func main() {
 	fmt.Println(c.ipTable)
 
 	for y := 7; y >= 0; y-- {
-		//-----------Блок подсчёта повторений ip-фдреса--------------------------------
+		//-----------Блок подсчёта повторений ip-адреса--------------------------------
 
 		c.indexIpTable += 1
 		c.counter = 1
@@ -293,21 +293,40 @@ func main() {
 	fmt.Println(a.ipInStringSlice[c.indexIpInStringSlice])
 	fmt.Println(c.indexIpTable)
 
-	//---Новый блок поиска уникальных ip-адресов для добавления их в срез ipTable------
-	for {
-		f := c.ipTable
-		g := a.ipInStringSlice[c.indexIpInStringSlice]
+	for y := 50; y >= 0; y-- {
+		if c.indexIpInStringSlice < (spacesInString - 3) {
+			//---Новый блок поиска уникальных ip-адресов для добавления их в срез ipTable------
+			for {
+				f := c.ipTable
+				g := a.ipInStringSlice[c.indexIpInStringSlice]
 
-		result := Contains(f, g)
-		fmt.Println(result)
-		if result == true {
-			c.indexIpInStringSlice += 1
-			continue
-		} else {
-			c.ipTable = append(c.ipTable, a.ipInStringSlice[c.indexIpInStringSlice])
-			break
+				result := Contains(f, g)
+				fmt.Println(result)
+				if result == true {
+					c.indexIpInStringSlice += 1
+					continue
+				} else {
+					c.ipTable = append(c.ipTable, a.ipInStringSlice[c.indexIpInStringSlice])
+					break
+				}
+				// --------------Конец нового блока поиска уникальных ip---------------------------
+			}
+
+			//-----------Блок подсчёта повторений ip-фдреса--------------------------------
+
+			c.indexIpTable += 1
+			c.counter = 1
+
+			for i := spacesInString - 3; i > 0; i-- {
+				if c.ipTable[c.indexIpTable] == a.ipInStringSlice[i] {
+					c.counter += 1
+				}
+			}
+			fmt.Println("ip-адрес -", c.ipTable[c.indexIpTable], "повторяется", c.counter, "раз")
+			c.countsIpTables = append(c.countsIpTables, c.counter)
+			fmt.Println(c.countsIpTables)
+			//--------------------Конец блока повторений---------------------------------------
 		}
-		// --------------Конец нового блока поиска уникальных ip---------------------------
 	}
 	fmt.Println(c.ipTable)
 }
