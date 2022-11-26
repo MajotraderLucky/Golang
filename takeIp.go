@@ -10,6 +10,16 @@ import (
 	"strings"
 )
 
+// Попробую использовать функцию для сравнения строки с элементами массива
+func Contains(a []string, x string) bool {
+	for _, n := range a {
+		if x == n {
+			return true
+		}
+	}
+	return false
+}
+
 func main() {
 	takeContent, err := ioutil.ReadFile("/home/ryazanov/Downloads/tdlfFile.txt") // Берем данные из лог-файла
 
@@ -232,4 +242,60 @@ func main() {
 		}
 	}
 	fmt.Println(c.ipTable)
+
+	for y := 7; y >= 0; y-- {
+		//-----------Блок подсчёта повторений ip-фдреса--------------------------------
+
+		c.indexIpTable += 1
+		c.counter = 1
+
+		for i := spacesInString - 3; i > 0; i-- {
+			if c.ipTable[c.indexIpTable] == a.ipInStringSlice[i] {
+				c.counter += 1
+			}
+		}
+		fmt.Println("ip-адрес -", c.ipTable[c.indexIpTable], "повторяется", c.counter, "раз")
+		c.countsIpTables = append(c.countsIpTables, c.counter)
+		fmt.Println(c.countsIpTables)
+		//--------------------Конец блока повторений---------------------------------------
+
+		//-------Блок поиска нового уникально ip и добавление его в срез-------------------
+		c.indexIpInStringSlice += 1
+		fmt.Println(c.ipTable[c.indexIpTable])
+
+		for i := c.indexIpTable; i >= 0; i-- {
+			if a.ipInStringSlice[c.indexIpInStringSlice] == c.ipTable[i] {
+				c.indexIpInStringSlice += 1
+			} else {
+				c.ipTable = append(c.ipTable, a.ipInStringSlice[c.indexIpInStringSlice])
+				break
+			}
+		}
+		fmt.Println(c.ipTable)
+		//------------------------Конец поиска уникального ip----------------------------
+	}
+
+	//-----------Блок подсчёта повторений ip-фдреса--------------------------------
+
+	c.indexIpTable += 1
+	c.counter = 1
+
+	for i := spacesInString - 3; i > 0; i-- {
+		if c.ipTable[c.indexIpTable] == a.ipInStringSlice[i] {
+			c.counter += 1
+		}
+	}
+	fmt.Println("ip-адрес -", c.ipTable[c.indexIpTable], "повторяется", c.counter, "раз")
+	c.countsIpTables = append(c.countsIpTables, c.counter)
+	fmt.Println(c.countsIpTables)
+	//--------------------Конец блока повторений---------------------------------------
+	c.indexIpInStringSlice += 1
+	fmt.Println(a.ipInStringSlice[c.indexIpInStringSlice])
+	fmt.Println(c.indexIpTable)
+
+	f := c.ipTable
+	g := a.ipInStringSlice[c.indexIpInStringSlice]
+
+	result := Contains(f, g)
+	fmt.Println(result)
 }
