@@ -222,7 +222,6 @@ func main() {
 	// Далее выводим результат, - сколько запросов с каждого уникального ip
 	lenUnicIpTable := len(c.ipTable)
 	c.indexIpTable = 0
-	fmt.Println(ten)
 	for p := lenUnicIpTable - 1; p >= 0; p-- {
 		fmt.Print(c.ipTable[p])
 		for l := 20 - len(c.ipTable[p]); l >= 0; l-- {
